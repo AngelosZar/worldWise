@@ -5,6 +5,7 @@ import Product from './pages/Product';
 import Pricing from './pages/Pricing';
 import Homepage from './pages/Homepage';
 import PageNotFound from './pages/PageNotFound';
+
 function App() {
   return (
     <BrowserRouter>
