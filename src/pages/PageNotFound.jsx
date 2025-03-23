@@ -1,10 +1,8 @@
 import React from 'react';
-function PageNotFound() {
+export default function PageNotFound() {
   return (
     <div>
-      <h1>opss no findy findy</h1>
+      <h1>Page not found 😢</h1>
     </div>
   );
 }
-
-export default PageNotFound;
