@@ -1,11 +1,15 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import styles from './Sidebar.module.css';
 
 function Footer() {
   return (
-    <div>
-      <h2>i am a footer</h2>
-    </div>
+    <footer className={styles.footer}>
+      <p className={styles.copyright}>
+        &copy; Copyright {new Date().getFullYear()}
+        <br />
+        <strong> By WorldWise inc</strong> - All rights reserved
+      </p>
+    </footer>
   );
 }
 
