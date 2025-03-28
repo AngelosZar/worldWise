@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './City.module.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 const formatDate = date =>
   new Intl.DateTimeFormat('en', {
@@ -19,10 +19,19 @@ function City() {
     notes: 'My favorite city so far!',
   };
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  let lat = searchParams.get('lat');
+  let lng = searchParams.get('lng');
 
   // const { cityName, emoji, date, notes } = currentCity;
 
-  return <h1>City {id}</h1>;
+  return (
+    <>
+      <h1>City {id}</h1>
+      <p>{lat}</p>
+      <p>{lng}</p>
+    </>
+  );
   //   return (
   //     <div className={styles.city}>
   //       <div className={styles.row}>
