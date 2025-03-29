@@ -35,7 +35,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <Layout> */}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="pricing" element={<Pricing />} />
@@ -56,7 +55,6 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      {/* </Layout> */}
     </BrowserRouter>
   );
 }
