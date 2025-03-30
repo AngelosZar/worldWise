@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './CountryList.module.css';
 import Spinner from './Spinner';
-// import CityItem from './CityItem';
+
 import CountryItem from './CountryItem';
 import Message from './Message';
+import { useCities } from '../contexts/CitiesContext';
 
-function CountryList({ loading, cities }) {
+function CountryList() {
+  const { cities, loading } = useCities();
   if (loading) return <Spinner />;
   if (!cities || cities.length === 0)
     return (
