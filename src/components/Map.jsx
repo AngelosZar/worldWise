@@ -11,21 +11,43 @@ import {
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useCities } from '../contexts/CitiesContext';
+import { useGeolocation } from '../hooks/useGeolocation';
+import Button from './Button';
 
 function Map() {
   const navigate = useNavigate();
   const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([40, 1]);
   const [searchParams, SetSearchParams] = useSearchParams();
+  const {
+    isLoading: isLoadingPosition,
+    position: geolocationPosition,
+    getPosition,
+  } = useGeolocation();
   const lng = searchParams.get('lng');
   const lat = searchParams.get('lat');
 
   useEffect(() => {
     if (lat && lng) setMapPosition([lat, lng]);
   }, [lat, lng]);
-  // const lat = searchParams.get('lat');
+
+  useEffect(() => {
+    if (geolocationPosition) {
+      setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+      SetSearchParams({
+        lat: geolocationPosition.lat,
+        lng: geolocationPosition.lng,
+      });
+    }
+  }, [geolocationPosition]);
+
   return (
     <div className={styles.mapContainer}>
+      {!geolocationPosition && (
+        <Button type="position" onclick={getPosition}>
+          {isLoadingPosition ? 'Loading...' : 'Get Position'}
+        </Button>
+      )}
       <MapContainer
         center={mapPosition}
         // center={[lat, lng]}
@@ -41,12 +63,6 @@ function Map() {
           <Marker
             key={city.id}
             position={[city.position.lat, city.position.lng]}
-            // eventHandlers={{
-            //   click: () => {
-            //     setMapPosition([city.position.lat, city.position.lng]);
-            //     navigate(`/app/cities/${city.id}`);
-            //   },
-            // }}
           >
             <Popup>
               <span>
