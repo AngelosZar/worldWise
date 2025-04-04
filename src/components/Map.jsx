@@ -13,19 +13,18 @@ import 'leaflet/dist/leaflet.css';
 import { useCities } from '../contexts/CitiesContext';
 import { useGeolocation } from '../hooks/useGeolocation';
 import Button from './Button';
+import useUrlPosition from '../hooks/useUrlPosition';
 
 function Map() {
   const navigate = useNavigate();
   const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([40, 1]);
-  const [searchParams, SetSearchParams] = useSearchParams();
+  const [lat, lng, setSearchParams] = useUrlPosition();
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
     getPosition,
   } = useGeolocation();
-  const lng = searchParams.get('lng');
-  const lat = searchParams.get('lat');
 
   useEffect(() => {
     if (lat && lng) setMapPosition([lat, lng]);
@@ -34,7 +33,7 @@ function Map() {
   useEffect(() => {
     if (geolocationPosition) {
       setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
-      SetSearchParams({
+      setSearchParams({
         lat: geolocationPosition.lat,
         lng: geolocationPosition.lng,
       });
