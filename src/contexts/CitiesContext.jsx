@@ -1,23 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { createContext } from 'react';
 
 const BASE_URL = 'http://localhost:3000';
 
 const CitiesContext = createContext();
+const initialState = {
+  cities: [],
+  loading: true,
+  currentCity: {},
+  error: '',
+};
+function reducer(state, action) {
+switch (action.type) {
+  case 'loading' :return{...state, loading : true}
 
+
+
+  case 'cities/loaded' :return{
+...state, loading : false, cities: action.payload
+  }
+  case 'cities/created' :
+    
+  case 'cities/deleted' :
+
+  case 'rejected' :return{
+      ...state,loading:false ,error:action.payload
+    }
+  default :throw new Error('Unknown action type');
+}}
 function CitiesProvider({ children }) {
-  const [cities, setCities] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentCity, setCurrentCity] = useState({});
+  //
+  // const [cities, setCities] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [currentCity, setCurrentCity] = useState({});
+  //
+  const {{cities,loading,currentCity}, dispatch } = useReducer(reducer, initialState);
+
   useEffect(function () {
+    dispatch({ type: 'loading' });
     async function fetchCities() {
       try {
-        setLoading(true);
+    
         const response = await fetch(`${BASE_URL}/cities`);
         const data = await response.json();
-        setCities(data);
+dispatch({ type: 'cities/loaded', payload: data });
       } catch (error) {
-        console.error('Error fetching cities:', error);
+        dispatch({ type: 'rejected', payload: 'There was an error loading data...4' });
       } finally {
         setLoading(false);
       }
