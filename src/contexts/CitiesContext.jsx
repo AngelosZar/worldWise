@@ -4,6 +4,7 @@ import { createContext } from 'react';
 const BASE_URL = 'http://localhost:3000';
 
 const CitiesContext = createContext();
+
 function CitiesProvider({ children }) {
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +50,22 @@ function CitiesProvider({ children }) {
       setCities(prevCities => [...prevCities, data]);
       console.log(data);
     } catch (error) {
-      console.error('Error fetching cities:', error);
+      console.error('Error creating city:');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function deleteCity(id) {
+    try {
+      setLoading(true);
+      const data = await fetch(`${BASE_URL}/cities/${id}`, {
+        method: 'DELETE',
+      });
+      console.log(data);
+      setCities(cities.filter(city => city.id !== data.id));
+    } catch (error) {
+      console.error('Error deleting city:');
     } finally {
       setLoading(false);
     }
@@ -64,6 +80,7 @@ function CitiesProvider({ children }) {
         setCurrentCity,
         getCity,
         createCity,
+        deleteCity,
       }}
     >
       {children}
