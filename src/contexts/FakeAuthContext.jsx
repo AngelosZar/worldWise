@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import { createContext, useContext } from 'react';
-import { FAKE_USER } from '../components/User';
+import { FAKE_USER } from '../components/UserProfile';
+
 const AuthContext = createContext();
 const initialState = {
   user: null,
@@ -34,6 +35,7 @@ function AuthProvider({ children }) {
     if (email === FAKE_USER.email && password === FAKE_USER.password) {
       dispatch({ type: 'login', payload: FAKE_USER });
     } else {
+      alert('Invalid credentials');
       throw new Error('Invalid credentials');
     }
   }
@@ -42,7 +44,7 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={(user, isAuthenticated, logIn, logOut)}>
+    <AuthContext.Provider value={{ user, isAuthenticated, logIn, logOut }}>
       {children}
     </AuthContext.Provider>
   );
@@ -53,6 +55,7 @@ function useAuth() {
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
+
   return context;
 }
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
 const FAKE_USER = {
-  name: import.meta.env.USER_NAME,
-  email: import.meta.env.USER_EMAIL,
-  password: import.meta.env.USER_PASSWORD,
-  avatar: import.meta.env.USER_AVATAR,
+  name: import.meta.env.VITE_FAKE_USER_NAME,
+  email: import.meta.env.VITE_FAKE_USER_EMAIL,
+  password: import.meta.env.VITE_FAKE_USER_PASSWORD,
+  avatar: import.meta.env.VITE_FAKE_USER_AVATAR,
 };
 
 function UserProfile() {

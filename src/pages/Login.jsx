@@ -1,15 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Login.module.css';
 import { useState } from 'react';
 import PageNav from '../components/PageNav';
 
-// import { useAuth, AuthProvider } from '../contexts/FakeAuthContext';
+import { useAuth } from '../contexts/FakeAuthContext';
+import { FAKE_USER } from '../components/UserProfile';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button';
 
 export default function Login() {
-  // PRE-FILL FOR DEV PURPOSES
-  const [email, setEmail] = useState('jack@example.com');
-  const [password, setPassword] = useState('qwerty');
+  const [email, setEmail] = useState(FAKE_USER.email);
+  const [password, setPassword] = useState(FAKE_USER.password);
+  const { logIn } = useAuth();
+  const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth();
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/app', { replace: true });
+    }
+    if (!isAuthenticated) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, user]);
+  function handleLogIn(e) {
+    e.preventDefault();
+    if (!email || !password) {
+      alert('Please fill in all fields');
+      return;
+    }
+    if (email && password) logIn(email, password);
+    navigate('/app/cities');
+  }
   return (
     <main className={styles.login}>
       <PageNav />
@@ -35,7 +57,9 @@ export default function Login() {
         </div>
 
         <div>
-          <button>Login</button>
+          <Button type="primary" onclick={handleLogIn}>
+            Login
+          </Button>
         </div>
       </form>
     </main>

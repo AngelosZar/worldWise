@@ -25,18 +25,6 @@
       "id": "17806751"
     },
     {
-      "cityName": "Berlin",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
-      "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
-      },
-      "id": "98443197"
-    },
-    {
       "id": "d191",
       "cityName": "Nuuk",
       "country": "Greenland",
@@ -61,18 +49,6 @@
       }
     },
     {
-      "id": "cbd6",
-      "cityName": "Valletta",
-      "country": "Malta",
-      "emoji": "🇲🇹",
-      "date": "2025-04-07T16:39:18.127Z",
-      "notes": "",
-      "position": {
-        "lat": "35.89795019335754",
-        "lng": "14.515342712402346"
-      }
-    },
-    {
       "id": "d5e0",
       "cityName": "Atlantic Ocean",
       "country": "",
@@ -82,6 +58,18 @@
       "position": {
         "lat": "40.93011520598307",
         "lng": "-11.425781250000002"
+      }
+    },
+    {
+      "id": "52a6",
+      "cityName": "Tobruk",
+      "country": "Libya",
+      "emoji": "🇱🇾",
+      "date": "2025-04-08T16:16:48.416Z",
+      "notes": "",
+      "position": {
+        "lat": "30.192618218499273",
+        "lng": "24.071044921875004"
       }
     }
   ]
