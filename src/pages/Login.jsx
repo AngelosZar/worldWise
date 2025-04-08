@@ -3,6 +3,8 @@ import styles from './Login.module.css';
 import { useState } from 'react';
 import PageNav from '../components/PageNav';
 
+// import { useAuth, AuthProvider } from '../contexts/FakeAuthContext';
+
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
   const [email, setEmail] = useState('jack@example.com');
